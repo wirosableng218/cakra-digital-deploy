@@ -34,8 +34,6 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to get payment token');
       }
-
-      setSnapToken(data.token);
       
       // Initialize and open Midtrans Snap
       const snap = await initializeMidtransSnap();
