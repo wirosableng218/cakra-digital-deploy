@@ -1,0 +1,287 @@
+/* ===== HERO (Tentang Kami) ===== */
+.about-hero {
+    margin-block-start: var(--header-h);
+    background: linear-gradient(135deg, color-mix(in oklab, var(--theme) 30%, transparent), color-mix(in oklab, var(--theme-dark) 25%, transparent));
+    padding-block: clamp(2.5rem, 8vw, 4.5rem);
+}
+
+.about-hero .c-hero-copy {
+    text-align: center;
+    max-inline-size: 72ch;
+    margin-inline: auto;
+}
+
+.about-hero .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px auto 18px;
+    padding: 10px 16px;
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 999px;
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .08);
+}
+
+.about-hero .breadcrumb a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.about-hero .breadcrumb .sep {
+    opacity: .6;
+}
+
+.about-hero .c-hero-copy p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/* ===== ABOUT WELCOME (teks + gambar) ===== */
+.about-welcome {
+    margin-block-start: 0.5rem;
+    padding: clamp(1.5rem, 5vw, 3rem) 1rem;
+}
+
+.welcome-title {
+    font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+    line-height: 1.2;
+    margin: 0 0 .5rem;
+}
+
+.welcome-lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.75;
+    max-inline-size: 72ch;
+    margin: .1em auto;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.welcome-copy {
+    max-inline-size: 62ch;
+    margin-inline: auto;
+    justify-self: start;
+}
+
+.welcome-visual {
+    display: grid;
+    place-items: center;
+}
+
+.welcome-image {
+    inline-size: clamp(220px, 40vw, 420px);
+    block-size: auto;
+    border-radius: 18px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .08);
+}
+
+@media (max-width: 900px) {
+    .welcome-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .welcome-visual {
+        order: 2;
+    }
+
+    .welcome-copy {
+        order: 1;
+    }
+}
+
+/* ===== TEAM SECTION ===== */
+.team-section {
+    padding: clamp(2rem, 6vw, 3.5rem) 1rem;
+}
+
+/* Banner OUR TEAM */
+.team-banner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    background: color-mix(in oklab, var(--theme, #6c5ce7) 88%, white 12%);
+    color: white;
+    border-radius: 20px;
+    padding: clamp(1rem, 3.2vw, 1.75rem);
+    margin-bottom: clamp(1.25rem, 4vw, 2rem);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .10);
+}
+
+/* Tambahan opsional: badge */
+.team-eyebrow {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: color-mix(in oklab, #fff 20%, transparent);
+}
+
+.team-banner-left h2 {
+    margin: .2rem 0 0;
+    font-size: clamp(1.45rem, 2.8vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -.01em;
+}
+
+.team-banner-right {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.7;
+    opacity: .95;
+}
+
+@media (max-width: 900px) {
+    .team-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* Grid kartu team */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(.9rem, 2.5vw, 1.25rem);
+}
+
+.team-card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+    padding: clamp(.9rem, 2.5vw, 1.1rem);
+    display: grid;
+    gap: .45rem;
+    align-content: start;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .08);
+    border-color: color-mix(in oklab, var(--theme, #6c5ce7) 25%, var(--surface-border));
+}
+
+.team-avatar {
+    inline-size: 48px;
+    block-size: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 2px solid color-mix(in oklab, var(--theme, #6c5ce7) 45%, white);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, .08);
+}
+
+.team-card h3 {
+    margin: .2rem 0 0;
+    font-size: 1rem;
+}
+
+.team-card p {
+    margin: 0;
+    color: var(--text-muted, #64748b);
+    line-height: 1.6;
+    font-size: .95rem;
+}
+
+@media (max-width: 900px) {
+    .team-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Garis pemisah halus sebelum footer */
+.team-section::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--surface-border);
+    margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* ===== About stats & CTA ===== */
+.about-stats {
+    background: color-mix(in oklab, var(--surface) 92%, transparent);
+    border-block: 1px solid var(--surface-border);
+}
+
+.statbar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+    padding: 1rem;
+    max-inline-size: 1100px;
+    margin: 0 auto;
+}
+
+.stat {
+    text-align: center;
+    padding: .75rem 0;
+}
+
+.stat .value {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-weight: 800;
+    color: var(--theme);
+}
+
+.stat .label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.about-cta {
+    padding: clamp(1.5rem, 5vw, 3rem) 1rem;
+}
+
+@media (max-width: 900px) {
+    .statbar {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Jadikan welcome sebagai kartu yang mengikuti mode */
+.about-welcome {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 16px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .06);
+    /* beri ruang dalam agar nyaman */
+    padding: clamp(1.5rem, 5vw, 3rem) 1.25rem;
+}
+
+/* Pastikan teks full-contrast dan tidak ter-opaque */
+.about-welcome,
+.about-welcome .welcome-title,
+.about-welcome .welcome-lead {
+    color: var(--text);
+    opacity: 1;
+    text-shadow: none;
+}
+
+/* Sedikit penegasan judul agar lebih terbaca */
+.about-welcome .welcome-title {
+    font-weight: 800;
+}
+
+/* Di dark mode, pastikan kartu benar-benar gelap, bukan semi-transparan */
+[data-mode="dark"] .about-welcome {
+    background: var(--surface);
+    border-color: var(--surface-border);
+}
