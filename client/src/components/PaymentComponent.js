@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MIDTRANS_CONFIG, initializeMidtransSnap } from '../midtransConfig';
 
 const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [snapToken, setSnapToken] = useState('');
 
   const defaultCustomer = {
     first_name: 'Customer',
