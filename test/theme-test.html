@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id" data-mode="light" data-theme="brand">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test - Cakra Digital Innovation</title>
+    <style>
+        /* Copy CSS variables from App.css */
+        :root {
+            /* theme */
+            --theme: #22c55e;
+            --theme-dark: #166534;
+            --theme-contrast: #ffffff;
+            --theme-text-contrast: #111827;
+
+            /* mode tokens (light default) */
+            --bg: #f9f9f9;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --surface: #ffffff;
+            --surface-muted: #f3f4f6;
+            --surface-border: #e5e7eb;
+            
+            /* Footer specific colors */
+            --footer-bg: #0f172a;
+            --footer-bg-end: #111827;
+            --footer-text: #e5e7eb;
+            --footer-text-muted: #cbd5e1;
+            --footer-text-light: #94a3b8;
+            --footer-heading: #f3f4f6;
+            --footer-brand: #f9fafb;
+        }
+
+        /* Mode mappings */
+        [data-mode="light"] {
+            --bg: #f9f9f9;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+            --surface: #ffffff;
+            --surface-muted: #f3f4f6;
+            --surface-border: #e5e7eb;
+            
+            /* Footer colors for light mode */
+            --footer-bg: #0f172a;
+            --footer-bg-end: #111827;
+            --footer-text: #e5e7eb;
+            --footer-text-muted: #cbd5e1;
+            --footer-text-light: #94a3b8;
+            --footer-heading: #f3f4f6;
+            --footer-brand: #f9fafb;
+        }
+
+        [data-mode="dark"] {
+            --bg: #0b1220;
+            --text: #e5e7eb;
+            --text-muted: #cbd5e1;
+            --text-light: #94a3b8;
+            --surface: #0f172a;
+            --surface-muted: #111827;
+            --surface-border: #1f2937;
+            
+            /* Footer colors for dark mode */
+            --footer-bg: #0b1220;
+            --footer-bg-end: #0f172a;
+            --footer-text: #cbd5e1;
+            --footer-text-muted: #94a3b8;
+            --footer-text-light: #6b7280;
+            --footer-heading: #e5e7eb;
+            --footer-brand: #f8fafc;
+        }
+
+        /* Theme mappings */
+        [data-theme="brand"] {
+            --theme: #22c55e;
+            --theme-dark: #166534;
+            --theme-contrast: #ffffff;
+        }
+
+        [data-theme="whatsapp"] {
+            --theme: #22c55e;
+            --theme-dark: #166534;
+            --theme-contrast: #ffffff;
+        }
+
+        [data-theme="instagram"] {
+            --theme: #e1306c;
+            --theme-dark: #a61b4b;
+            --theme-contrast: #ffffff;
+        }
+
+        [data-theme="linkedin"] {
+            --theme: #0a66c2;
+            --theme-dark: #084b8f;
+            --theme-contrast: #ffffff;
+        }
+
+        /* Basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--theme), var(--theme-dark));
+            color: var(--theme-contrast);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 2px solid var(--theme);
+            background: var(--surface);
+            color: var(--theme);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: var(--theme);
+            color: var(--theme-contrast);
+        }
+
+        button.active {
+            background: var(--theme);
+            color: var(--theme-contrast);
+        }
+
+        .test-section {
+            background: var(--surface);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--surface-border);
+        }
+
+        .test-section h2 {
+            color: var(--theme);
+            margin-bottom: 15px;
+        }
+
+        .test-section h3 {
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .test-section p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .footer-test {
+            background: linear-gradient(180deg, var(--footer-bg), var(--footer-bg-end));
+            color: var(--footer-text);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .footer-test h3 {
+            color: var(--footer-brand);
+            margin-bottom: 10px;
+        }
+
+        .footer-test p {
+            color: var(--footer-text-muted);
+        }
+
+        .footer-test .footer-light {
+            color: var(--footer-text-light);
+            font-size: 0.9rem;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .status-success {
+            background: color-mix(in oklab, var(--theme) 20%, transparent);
+            color: var(--theme);
+            border: 1px solid var(--theme);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Theme & Mode Testing</h1>
+            <p>Test implementasi sistem automatic text color inversion</p>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Mode:</label>
+                <div>
+                    <button onclick="setMode('light')" id="light-btn" class="active">☀️ Light</button>
+                    <button onclick="setMode('dark')" id="dark-btn">🌙 Dark</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Theme:</label>
+                <div>
+                    <button onclick="setTheme('brand')" id="brand-btn" class="active">🟢 Brand</button>
+                    <button onclick="setTheme('whatsapp')" id="whatsapp-btn">🟢 WhatsApp</button>
+                    <button onclick="setTheme('instagram')" id="instagram-btn">🟣 Instagram</button>
+                    <button onclick="setTheme('linkedin')" id="linkedin-btn">🔵 LinkedIn</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📝 Text Contrast Test</h2>
+            <h3>Heading dengan warna theme</h3>
+            <p>Ini adalah paragraf dengan warna text-muted yang harus tetap readable di semua mode dan theme.</p>
+            <p style="color: var(--text);">Ini adalah text dengan warna utama yang harus kontras dengan background.</p>
+            
+            <div class="status-indicator status-success">
+                ✅ Status indicator dengan theme color
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎯 Interactive Elements</h2>
+            <h3>Button dan Link Test</h3>
+            <p>Button di bawah ini menggunakan theme color dan harus readable:</p>
+            <button style="margin: 10px 5px;">Primary Button</button>
+            <button style="background: transparent; border: 2px solid var(--theme); color: var(--theme);">Secondary Button</button>
+        </div>
+
+        <div class="footer-test">
+            <h3>Footer Section Test</h3>
+            <p>Footer text dengan warna yang berbeda untuk testing kontras.</p>
+            <div class="footer-light">Footer light text untuk informasi tambahan.</div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Current Values</h2>
+            <p><strong>Mode:</strong> <span id="current-mode">light</span></p>
+            <p><strong>Theme:</strong> <span id="current-theme">brand</span></p>
+            <p><strong>Background:</strong> <span id="current-bg">--</span></p>
+            <p><strong>Text Color:</strong> <span id="current-text">--</span></p>
+            <p><strong>Theme Color:</strong> <span id="current-theme-color">--</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Helper function to calculate contrasting text color
+        function getContrastingTextColor(backgroundColor) {
+            const hex = backgroundColor.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            
+            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            return luminance > 0.5 ? '#111827' : '#f8fafc';
+        }
+
+        // Helper function to update text contrast based on theme
+        function updateTextContrast(theme) {
+            const root = document.documentElement;
+            const themeColors = {
+                'brand': '#22c55e',
+                'whatsapp': '#22c55e', 
+                'instagram': '#e1306c',
+                'linkedin': '#0a66c2'
+            };
+            
+            const themeColor = themeColors[theme] || themeColors['brand'];
+            const contrastingText = getContrastingTextColor(themeColor);
+            
+            root.style.setProperty('--theme-text-contrast', contrastingText);
+            
+            // Add text shadow for better readability
+            const themeElements = document.querySelectorAll('h2, .test-section h2');
+            themeElements.forEach(el => {
+                if (contrastingText === '#111827') {
+                    el.style.textShadow = '0 1px 2px rgba(0,0,0,0.1)';
+                } else {
+                    el.style.textShadow = '0 1px 2px rgba(255,255,255,0.1)';
+                }
+            });
+        }
+
+        function setMode(mode) {
+            document.documentElement.setAttribute('data-mode', mode);
+            
+            // Update button states
+            document.querySelectorAll('[id$="-btn"]').forEach(btn => {
+                if (btn.id.includes('light') || btn.id.includes('dark')) {
+                    btn.classList.remove('active');
+                }
+            });
+            document.getElementById(mode + '-btn').classList.add('active');
+            
+            // Update current theme for contrast
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'brand';
+            updateTextContrast(currentTheme);
+            
+            updateCurrentValues();
+            console.log('Set mode to', mode);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // Update button states
+            document.querySelectorAll('[id$="-btn"]').forEach(btn => {
+                if (!btn.id.includes('light') && !btn.id.includes('dark')) {
+                    btn.classList.remove('active');
+                }
+            });
+            document.getElementById(theme + '-btn').classList.add('active');
+            
+            updateTextContrast(theme);
+            updateCurrentValues();
+            console.log('Set theme to', theme);
+        }
+
+        function updateCurrentValues() {
+            const mode = document.documentElement.getAttribute('data-mode');
+            const theme = document.documentElement.getAttribute('data-theme');
+            
+            document.getElementById('current-mode').textContent = mode;
+            document.getElementById('current-theme').textContent = theme;
+            
+            // Get computed CSS values
+            const computedStyle = getComputedStyle(document.documentElement);
+            document.getElementById('current-bg').textContent = computedStyle.getPropertyValue('--bg').trim();
+            document.getElementById('current-text').textContent = computedStyle.getPropertyValue('--text').trim();
+            document.getElementById('current-theme-color').textContent = computedStyle.getPropertyValue('--theme').trim();
+        }
+
+        // Initialize
+        updateCurrentValues();
+        updateTextContrast('brand');
+    </script>
+</body>
+</html>
