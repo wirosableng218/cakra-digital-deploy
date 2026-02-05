@@ -93,7 +93,7 @@ function Pricing() {
     },
     {
       name: 'Standard',
-      price: '1.799.000',
+      price: '1.199.000',
       period: 'one-time',
       features: [
         'Website 10 halaman',
@@ -113,7 +113,7 @@ function Pricing() {
     },
     {
       name: 'Pro',
-      price: '2.775.000',
+      price: '1.799.000',
       period: 'one-time',
       features: [
         'Website unlimited halaman',
