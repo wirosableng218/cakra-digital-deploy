@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MIDTRANS_CONFIG, initializeMidtransSnap } from '../midtransConfig';
+import { midtransService } from '../services/midtrans';
 
 const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
   const [loading, setLoading] = useState(false);
@@ -13,50 +13,36 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
     ...customerData
   };
 
-  const getSnapToken = async () => {
+  const handlePayment = async () => {
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch(MIDTRANS_CONFIG.apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: amount,
-          ...defaultCustomer
-        }),
-      });
+      const orderData = {
+        orderId: `ORDER-${Date.now()}`,
+        grossAmount: amount,
+        customerDetails: defaultCustomer,
+        itemDetails: [
+          {
+            id: 'ITEM1',
+            price: amount,
+            quantity: 1,
+            name: 'Product Payment'
+          }
+        ]
+      };
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to get payment token');
-      }
+      const transaction = await midtransService.createTransaction(orderData);
       
-      // Initialize and open Midtrans Snap
-      const snap = await initializeMidtransSnap();
-      snap.pay(data.token, {
-        onSuccess: (result) => {
-          console.log('Payment success:', result);
-          alert('Pembayaran berhasil!');
-        },
-        onPending: (result) => {
-          console.log('Payment pending:', result);
-          alert('Pembayaran pending, menunggu pembayaran.');
-        },
-        onError: (result) => {
-          console.log('Payment error:', result);
-          setError('Pembayaran gagal: ' + result.status_message);
-        },
-        onClose: () => {
-          console.log('Customer closed the popup without finishing the payment');
-        }
-      });
-
+      // Process payment with Snap
+      const result = await midtransService.processPayment(transaction.token);
+      
+      console.log('Payment success:', result);
+      alert('Pembayaran berhasil!');
+      
     } catch (err) {
-      setError(err.message);
+      console.error('Payment error:', err);
+      setError(err.message || 'Terjadi kesalahan saat pembayaran');
     } finally {
       setLoading(false);
     }
@@ -85,7 +71,7 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
       )}
 
       <button
-        onClick={getSnapToken}
+        onClick={handlePayment}
         disabled={loading}
         style={{
           width: '100%',
@@ -103,7 +89,7 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
 
       <div style={{ marginTop: '15px', fontSize: '12px', color: '#666' }}>
         <p>Powered by Midtrans</p>
-        <p>Environment: {MIDTRANS_CONFIG.isProduction ? 'Production' : 'Sandbox'}</p>
+        <p>Environment: Sandbox</p>
       </div>
     </div>
   );
