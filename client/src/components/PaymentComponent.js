@@ -68,8 +68,8 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
       }}>
         <p><strong>📢 Informasi Pembayaran</strong></p>
         <p>Sistem pembayaran kami sedang dalam proses aktivasi. Untuk sementara, silakan hubungi admin untuk proses pembayaran manual.</p>
-        <p><strong>WhatsApp:</strong> +62 812-3456-7890</p>
-        <p><strong>Email:</strong> admin@cakra-digital.com</p>
+        <p><strong>WhatsApp:</strong> +62 85852345718</p>
+        <p><strong>Email:</strong> cdiyunoru@gmail.com</p>
       </div>
 
       {error && (
