@@ -295,6 +295,9 @@ function Pricing() {
               <Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
+              <Link to="/payment">Payment</Link>
+            </li>
+            <li>
               <Link to="/client">Client</Link>
             </li>
             <li>
@@ -339,6 +342,9 @@ function Pricing() {
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
+            </li>
+            <li>
+              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
             </li>
             <li>
               <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>
