@@ -75,7 +75,7 @@ function Pricing() {
   const websitePackages = [
     {
       name: 'Basic',
-      price: '699.000',
+      price: '599.000',
       period: 'one-time',
       features: [
         'Website 5 halaman',
