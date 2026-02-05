@@ -14,8 +14,7 @@ router.post('/create-transaction', async (req, res) => {
                 gross_amount: grossAmount
             },
             customer_details: customerDetails,
-            item_details: itemDetails,
-            enabled_payments: ['credit_card', 'gopay', 'shopeepay', 'bank_transfer']
+            item_details: itemDetails
         };
 
         const transaction = await snap.createTransaction(parameter);
