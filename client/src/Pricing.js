@@ -145,8 +145,8 @@ function Pricing() {
         'Free revisi unlimited',
         'Estimasi pengerjaan: 14–21 hari kerja',
         'Bonus: Setup pro + Iklan Google 1 bulan (senilai Rp 1.400.000)',
-        '🔥 *Mystery bonus senilai Rp 2.000.000 untuk 10 pelanggan pertama!*',
-        '⭐ *Dapatkan akses eksklusif ke fitur premium yang belum dirilis!*'
+        '🔥 *Free maintenance 1 bulan untuk 5 pelanggan pertama!*',
+        '⭐ *Dapatkan konsultasi gratis untuk optimasi website*'
       ],
       popular: false,
       color: '#2E7D32',
