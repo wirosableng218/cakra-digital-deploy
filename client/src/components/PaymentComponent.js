@@ -58,6 +58,20 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
         <p><strong>Email:</strong> {defaultCustomer.email}</p>
       </div>
 
+      <div style={{ 
+        marginBottom: '15px', 
+        padding: '15px', 
+        backgroundColor: '#e3f2fd', 
+        color: '#1565c0', 
+        borderRadius: '8px',
+        fontSize: '14px'
+      }}>
+        <p><strong>📢 Informasi Pembayaran</strong></p>
+        <p>Sistem pembayaran kami sedang dalam proses aktivasi. Untuk sementara, silakan hubungi admin untuk proses pembayaran manual.</p>
+        <p><strong>WhatsApp:</strong> +62 812-3456-7890</p>
+        <p><strong>Email:</strong> admin@cakra-digital.com</p>
+      </div>
+
       {error && (
         <div style={{ 
           marginBottom: '15px', 
@@ -89,7 +103,7 @@ const PaymentComponent = ({ amount = 10000, customerData = {} }) => {
 
       <div style={{ marginTop: '15px', fontSize: '12px', color: '#666' }}>
         <p>Powered by Midtrans</p>
-        <p>Environment: Sandbox</p>
+        <p>Environment: Production</p>
       </div>
     </div>
   );
