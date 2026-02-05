@@ -93,7 +93,7 @@ function Pricing() {
     },
     {
       name: 'Standard',
-      price: '1.199.000',
+      price: '1.799.000',
       period: 'one-time',
       features: [
         'Website 10 halaman',
