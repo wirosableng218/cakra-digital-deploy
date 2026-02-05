@@ -7,7 +7,6 @@ import Consultation from './Consultation';
 import Tentang from './Tentang';
 import SEO from './SEO';
 import Client from './client';
-import ApiTest from './components/ApiTest';
 import PaymentComponent from './components/PaymentComponent';
 import ChatWidget from './ChatWidget';
 import reportWebVitals from './reportWebVitals';
@@ -113,7 +112,6 @@ root.render(
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/tentang" element={<Tentang />} />
         <Route path="/client" element={<Client />} />
-        <Route path="/api-test" element={<ApiTest />} />
         <Route path="/payment" element={<PaymentComponent />} />
       </Routes>
       <GlobalChatWrapper />

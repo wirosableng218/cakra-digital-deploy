@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "cakra-digital-production",
   "builds": [
     {
       "src": "client/package.json",
@@ -7,9 +8,21 @@
       "config": {
         "distDir": "build"
       }
+    },
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/midtrans/(.*)",
+      "dest": "/server/index.js"
+    },
+    {
+      "src": "/api/whatsapp/(.*)",
+      "dest": "/server/index.js"
+    },
     {
       "src": "/api/(.*)",
       "dest": "/api/$1"

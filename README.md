@@ -130,7 +130,9 @@ Submit contact form.
 
 ## 🧪 Testing API
 
-Buka http://localhost:3002/api-test untuk halaman testing API.
+API dapat diuji melalui endpoint berikut:
+- Payment Gateway: `/api/midtrans/create-transaction`
+- WhatsApp API: `/api/whatsapp/send`
 
 ## 📝 Environment Variables
 

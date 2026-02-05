@@ -165,15 +165,10 @@ function App() {
               </Link>
             </li>
             <li>
-              <Link to="/api-test">
-                API Test
-              </Link>
-            </li>
-            <li>
               <Link to="/payment">
                 Payment
               </Link>
-            </li> 
+            </li>
             <li>
               <Link to="/client">Client</Link>
             </li>
@@ -225,9 +220,6 @@ function App() {
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
-            </li>
-            <li>
-              <Link to="/api-test" onClick={() => setMobileOpen(false)}>API Test</Link>
             </li>
             <li>
               <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
