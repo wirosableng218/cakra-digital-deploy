@@ -60,20 +60,59 @@ export const midtransService = {
   // Process payment with Snap
   processPayment(snapToken) {
     return new Promise((resolve, reject) => {
-      window.snap.pay(snapToken, {
-        onSuccess: function(result) {
-          resolve(result);
-        },
-        onPending: function(result) {
-          resolve(result);
-        },
-        onError: function(result) {
-          reject(result);
-        },
-        onClose: function() {
-          reject(new Error('Payment popup closed'));
-        }
-      });
+      // Load Midtrans Snap script if not already loaded
+      if (!window.snap) {
+        const script = document.createElement('script');
+        script.src = process.env.NODE_ENV === 'production' 
+          ? 'https://app.midtrans.com/snap/snap.js' 
+          : 'https://app.sandbox.midtrans.com/snap/snap.js';
+        script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY);
+        
+        script.onload = () => {
+          if (window.snap) {
+            window.snap.pay(snapToken, {
+              onSuccess: (result) => {
+                console.log('Payment success:', result);
+                resolve(result);
+              },
+              onPending: (result) => {
+                console.log('Payment pending:', result);
+                resolve(result);
+              },
+              onError: (result) => {
+                console.log('Payment error:', result);
+                reject(new Error(result.status_message || 'Payment failed'));
+              },
+              onClose: () => {
+                reject(new Error('Payment popup closed'));
+              }
+            });
+          } else {
+            reject(new Error('Midtrans Snap failed to load'));
+          }
+        };
+        
+        script.onerror = () => reject(new Error('Failed to load Midtrans Snap script'));
+        document.body.appendChild(script);
+      } else {
+        window.snap.pay(snapToken, {
+          onSuccess: (result) => {
+            console.log('Payment success:', result);
+            resolve(result);
+          },
+          onPending: (result) => {
+            console.log('Payment pending:', result);
+            resolve(result);
+          },
+          onError: (result) => {
+            console.log('Payment error:', result);
+            reject(new Error(result.status_message || 'Payment failed'));
+          },
+          onClose: () => {
+            reject(new Error('Payment popup closed'));
+          }
+        });
+      }
     });
   }
 };
