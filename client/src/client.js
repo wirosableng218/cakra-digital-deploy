@@ -225,22 +225,8 @@ function Client() {
                 Layanan
               </button>
               <ul className="submenu">
-              <Link to="/consultation">Contact</Link>
-            </li>
-            <li className="mode-item">
-              <button
-                type="button"
-                className="mode-btn"
-                aria-label="Toggle light/dark mode"
-                title="Toggle theme"
-                onClick={() => {
-                  const cur = document.documentElement.getAttribute('data-mode') || 'light';
-                  const next = cur === 'dark' ? 'light' : 'dark';
-                  window.__setAppMode && window.__setAppMode(next);
-                }}
-              >
-                <span className="icon">🌓</span>
-              </button>
+                <li><Link to="/consultation">Contact</Link></li>
+              </ul>
             </li>
           </ul>
         </nav>
