@@ -95,7 +95,7 @@ function SEO() {
             <div className="logo" aria-label="Cakra Digital Innovation">
               <Link to="/" className="site-logo" aria-label="Beranda">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg`}
+                  src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`}
                   alt="Cakra Digital Innovation"
                   className="site-logo__img"
                   decoding="async"
@@ -133,6 +133,9 @@ function SEO() {
             <li><Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
+              <Link to="/payment">Payment</Link>
+            </li>
+            <li>
               <Link to="/client">Client</Link>
             </li>
             <li>
@@ -168,6 +171,9 @@ function SEO() {
               </ul>
             </li>
             <li><Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link></li>
+            <li>
+              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
+            </li>
             <li><Link to="/consultation" onClick={() => setMobileOpen(false)}>Contact</Link></li>
             <li className="mode-item">
               <button type="button" className="mode-btn" aria-label="Toggle light/dark mode" onClick={() => {

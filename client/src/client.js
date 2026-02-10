@@ -185,7 +185,7 @@ function Client() {
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
             <img
-              src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg`}
+              src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`}
               alt="Cakra Digital Innovation"
               className="site-logo__img"
               decoding="async"
@@ -232,6 +232,9 @@ function Client() {
               </ul>
             </li>
             <li><Link to="/tentang">Tentang Kami</Link>
+            </li>
+            <li>
+              <Link to="/payment">Payment</Link>
             </li>
             <li>
               <Link to="/client">Client</Link>
@@ -284,6 +287,9 @@ function Client() {
             </li>
             <li><Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami
             </Link>
+            </li>
+            <li>
+              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
             </li>
             <li>
               <Link to="/client" onClick={() => setMobileOpen(false)}>Client

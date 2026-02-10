@@ -131,19 +131,143 @@ const PaymentComponent = () => {
       </h2>
 
       <div style={{ 
-        marginBottom: '30px', 
-        padding: '20px', 
-        backgroundColor: '#e3f2fd', 
-        color: '#1565c0', 
-        borderRadius: '8px',
-        fontSize: '16px',
-        textAlign: 'center'
+        marginBottom: '40px', 
+        padding: '32px', 
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        borderRadius: '16px',
+        color: '#ffffff',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        boxShadow: '0 10px 30px rgba(102, 126, 234, 0.3)'
       }}>
-        <p><strong>📢 Informasi Pembayaran</strong></p>
-        <p>Sistem pembayaran kami sedang dalam proses aktivasi. Untuk sementara, silakan hubungi admin untuk proses pembayaran manual.</p>
-        <p><strong>WhatsApp:</strong> +62 85852345718</p>
-        <p><strong>Email:</strong> cdiyunoru@gmail.com</p>
+        <div style={{
+          position: 'absolute',
+          top: '-50%',
+          right: '-50%',
+          width: '200%',
+          height: '200%',
+          background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+          animation: 'pulse 3s ease-in-out infinite'
+        }}></div>
+        
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '64px',
+            height: '64px',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            borderRadius: '50%',
+            marginBottom: '20px'
+          }}>
+            <span style={{ fontSize: '28px' }}>�</span>
+          </div>
+          
+          <h3 style={{
+            fontSize: '24px',
+            fontWeight: '700',
+            marginBottom: '16px',
+            textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+            Sistem Pembayaran Sedang Dikembangkan
+          </h3>
+          
+          <p style={{
+            fontSize: '16px',
+            lineHeight: '1.6',
+            marginBottom: '24px',
+            opacity: 0.95,
+            maxWidth: '500px',
+            margin: '0 auto 24px'
+          }}>
+            Kami sedang dalam proses aktivasi sistem pembayaran otomatis. 
+            Untuk sementara, tim kami siap membantu proses pembayaran Anda secara manual.
+          </p>
+          
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            <a 
+              href="https://wa.me/6285852345718?text=Halo,%20saya%20ingin%20bertanya%20tentang%20pembayaran"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                backgroundColor: '#25D366',
+                color: '#ffffff',
+                textDecoration: 'none',
+                borderRadius: '12px',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 6px 20px rgba(37, 211, 102, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = '0 4px 15px rgba(37, 211, 102, 0.3)';
+              }}
+            >
+              <span>💬</span>
+              WhatsApp
+            </a>
+            
+            <a 
+              href="mailto:cdiyunoru@gmail.com?subject=Informasi%20Pembayaran&body=Halo,%20saya%20ingin%20bertanya%20tentang%20pembayaran"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                color: '#ffffff',
+                textDecoration: 'none',
+                borderRadius: '12px',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                border: '2px solid rgba(255, 255, 255, 0.3)'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >
+              <span>✉️</span>
+              Email
+            </a>
+          </div>
+          
+          <p style={{
+            fontSize: '14px',
+            opacity: 0.8,
+            marginTop: '20px',
+            fontStyle: 'italic'
+          }}>
+            Respon cepat • Tim profesional • Siap membantu 24/7
+          </p>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); opacity: 0.5; }
+          50% { transform: scale(1.1); opacity: 0.8; }
+        }
+      `}</style>
 
       {error && (
         <div style={{ 

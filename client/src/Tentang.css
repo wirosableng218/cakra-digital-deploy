@@ -173,13 +173,12 @@
 }
 
 .team-avatar {
-    inline-size: 48px;
-    block-size: 48px;
+    inline-size: 60px;
+    block-size: 60px;
     border-radius: 50%;
     object-fit: cover;
-    display: block;
-    border: 2px solid color-mix(in oklab, var(--theme, #6c5ce7) 45%, white);
-    box-shadow: 0 5px 14px rgba(0, 0, 0, .08);
+    border: 2px solid var(--theme);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .team-card h3 {

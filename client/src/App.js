@@ -93,12 +93,46 @@ function App() {
       (typeof CSS !== 'undefined' && CSS.supports && (CSS.supports('mask-image', 'url("")') || CSS.supports('-webkit-mask-image', 'url("")')));
     if (!supportsMask) {
       el.classList.add('no-mask');
-      el.style.backgroundImage = `url(${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg)`;
+      el.style.backgroundImage = `url(${process.env.PUBLIC_URL}/images/sampul-cover.png)`;
       el.style.backgroundRepeat = 'no-repeat';
       el.style.backgroundPosition = 'center';
       el.style.backgroundSize = 'contain';
       el.style.backgroundColor = 'transparent';
     }
+  }, []);
+
+  // Hide watermark PAS saat mencapai heading "Layanan Kami"
+  useEffect(() => {
+    const handleScroll = () => {
+      const watermark = wmRef.current;
+      const servicesSection = document.querySelector('#services');
+      if (!watermark || !servicesSection) return;
+
+      // Cari heading "Layanan Kami" secara spesifik
+      const layananHeading = Array.from(document.querySelectorAll('h2')).find(h2 => 
+        h2.textContent.trim() === 'Layanan Kami'
+      );
+      
+      if (!layananHeading) return;
+
+      const headingTop = layananHeading.getBoundingClientRect().top;
+      
+      // Hide watermark PAS saat heading "Layanan Kami" terlihat (tepat di batas)
+      if (headingTop <= window.innerHeight * 0.1) { // 10% dari viewport height
+        watermark.style.opacity = '0';
+        watermark.style.visibility = 'hidden';
+      } else {
+        watermark.style.opacity = '1';
+        watermark.style.visibility = 'visible';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -107,7 +141,7 @@ function App() {
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
             <img
-              src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg`}
+              src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`}
               alt="Cakra Digital Innovation"
               className="site-logo__img"
               decoding="async"
@@ -165,31 +199,26 @@ function App() {
               </Link>
             </li>
             <li>
-              <Link to="/payment">
-                Payment
-              </Link>
-            </li>
-            <li>
               <Link to="/client">Client</Link>
             </li>
             <li>
               <Link to="/consultation">Contact</Link>
             </li>
-          <li className="mode-item">
-            <button
-              type="button"
-              className="mode-btn"
-              aria-label="Toggle light/dark mode"
-              title="Toggle theme"
-              onClick={() => {
-                const cur = document.documentElement.getAttribute('data-mode') || 'light';
-                const next = cur === 'dark' ? 'light' : 'dark';
-                window.__setAppMode && window.__setAppMode(next);
-              }}
-            >
-              <span className="icon">🌓</span>
-            </button>
-          </li>
+            <li className="mode-item">
+              <button
+                type="button"
+                className="mode-btn"
+                aria-label="Toggle light/dark mode"
+                title="Toggle theme"
+                onClick={() => {
+                  const cur = document.documentElement.getAttribute('data-mode') || 'light';
+                  const next = cur === 'dark' ? 'light' : 'dark';
+                  window.__setAppMode && window.__setAppMode(next);
+                }}
+              >
+                <span className="icon">🌓</span>
+              </button>
+            </li>
           </ul>
         </nav>
         <div
@@ -220,9 +249,6 @@ function App() {
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
-            </li>
-            <li>
-              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
             </li>
             <li>
               <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>
@@ -258,10 +284,10 @@ function App() {
             className="hero-watermark"
             ref={wmRef}
             style={{
-              backgroundImage: `url(${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg)`,
+              backgroundImage: `url(${process.env.PUBLIC_URL}/images/sampul-cover.png)`,
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
-              backgroundSize: 'contain'
+              backgroundSize: 'cover'
             }}
           />
           <div className="hero-content">

@@ -65,7 +65,7 @@ function Tentang() {
             <div className="logo" aria-label="Cakra Digital Innovation">
               <Link to="/" className="site-logo" aria-label="Beranda">
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation-viewBox-fixed.svg`}
+                  src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`}
                   alt="Cakra Digital Innovation"
                   className="site-logo__img"
                   decoding="async"
@@ -113,6 +113,9 @@ function Tentang() {
               <Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
+              <Link to="/payment">Payment</Link>
+            </li>
+            <li>
                           <Link to="/client">Client</Link>
                         </li>
             <li>
@@ -157,6 +160,9 @@ function Tentang() {
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
+            </li>
+            <li>
+              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
             </li>
             <li>
               <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>
@@ -207,7 +213,7 @@ function Tentang() {
     <div className="welcome-visual" aria-hidden="true">
       <img
         className="welcome-image"
-        src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`}
+        src={`${process.env.PUBLIC_URL}/images/sampul-cover.png`}
         alt="Cakra Digital Innovation"
         loading="lazy"
       />
@@ -228,32 +234,32 @@ function Tentang() {
 
             <div className="team-grid">
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim Marketing" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim Marketing" className="team-avatar" loading="lazy" />
                 <h3>Tim Marketing</h3>
                 <p>Melayani setiap klien dengan layanan online 24 jam.</p>
               </div>
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim Web Design" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim Web Design" className="team-avatar" loading="lazy" />
                 <h3>Tim Web Design</h3>
                 <p>Merancang website dengan tampilan menarik dan responsif.</p>
               </div>
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim ADS" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim ADS" className="team-avatar" loading="lazy" />
                 <h3>Tim ADS</h3>
                 <p>Jasa iklan digital untuk strategi pemasaran terbaik.</p>
               </div>
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim SEO" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim SEO" className="team-avatar" loading="lazy" />
                 <h3>Tim SEO</h3>
                 <p>Optimasi mesin pencari untuk trafik yang berkualitas.</p>
               </div>
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim Programmer" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim Programmer" className="team-avatar" loading="lazy" />
                 <h3>Tim Programmer</h3>
                 <p>Membangun fitur yang andal, aman, dan scalable.</p>
               </div>
               <div className="team-card">
-                <img src={`${process.env.PUBLIC_URL}/images/Cakra-Digital-Innovation.svg`} alt="Tim Server" className="team-avatar" loading="lazy" />
+                <img src={`${process.env.PUBLIC_URL}/images/cakra-logo.png`} alt="Tim Server" className="team-avatar" loading="lazy" />
                 <h3>Tim Server</h3>
                 <p>Pengelolaan server dan infrastruktur dengan performa tinggi.</p>
               </div>
