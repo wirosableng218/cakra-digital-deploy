@@ -133,9 +133,6 @@ function SEO() {
             <li><Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
-              <Link to="/payment">Payment</Link>
-            </li>
-            <li>
               <Link to="/client">Client</Link>
             </li>
             <li>
@@ -172,9 +169,8 @@ function SEO() {
             </li>
             <li><Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link></li>
             <li>
-              <Link to="/payment" onClick={() => setMobileOpen(false)}>Payment</Link>
+              <Link to="/consultation" onClick={() => setMobileOpen(false)}>Contact</Link>
             </li>
-            <li><Link to="/consultation" onClick={() => setMobileOpen(false)}>Contact</Link></li>
             <li className="mode-item">
               <button type="button" className="mode-btn" aria-label="Toggle light/dark mode" onClick={() => {
                 const cur = document.documentElement.getAttribute('data-mode') || 'light';
