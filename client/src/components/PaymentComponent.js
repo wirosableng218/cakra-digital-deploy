@@ -9,7 +9,7 @@ const PaymentComponent = () => {
   const websitePackages = [
     {
       name: 'Basic',
-      price: 599000,
+      price: 700000,
       period: 'one-time',
       features: [
         'Website 5 halaman',
@@ -26,7 +26,7 @@ const PaymentComponent = () => {
     },
     {
       name: 'Standard',
-      price: 1199000,
+      price: 1500000,
       period: 'one-time',
       features: [
         'Website 10 halaman',
@@ -46,7 +46,7 @@ const PaymentComponent = () => {
     },
     {
       name: 'Pro',
-      price: 1799000,
+      price: 2000000,
       period: 'one-time',
       features: [
         'Website unlimited halaman',
@@ -63,7 +63,7 @@ const PaymentComponent = () => {
     },
     {
       name: 'Business',
-      price: 5000000,
+      price: 3000000,
       period: 'one-time',
       features: [
         'Website unlimited halaman',

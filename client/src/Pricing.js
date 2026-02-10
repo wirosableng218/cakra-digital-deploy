@@ -75,7 +75,7 @@ function Pricing() {
   const websitePackages = [
     {
       name: 'Basic',
-      price: '599.000',
+      price: '700.000',
       period: 'one-time',
       features: [
         'Website 5 halaman',
@@ -93,7 +93,7 @@ function Pricing() {
     },
     {
       name: 'Standard',
-      price: '1.199.000',
+      price: '1.500.000',
       period: 'one-time',
       features: [
         'Website 10 halaman',
@@ -113,7 +113,7 @@ function Pricing() {
     },
     {
       name: 'Pro',
-      price: '1.799.000',
+      price: '2.000.000',
       period: 'one-time',
       features: [
         'Website unlimited halaman',
@@ -125,14 +125,13 @@ function Pricing() {
         'Shared hosting / CPanel',
         'Free revisi 3x',
         'Estimasi pengerjaan: 7–14 hari kerja',
-        'Harga: Rp 2.775.000 (Diskon 44.5% dari Rp 4.999.000)',
       ],
       popular: false,
       color: '#FF9800',
     },
     {
       name: 'Business',
-      price: '5.000.000',
+      price: '3.000.000',
       period: 'one-time',
       features: [
         'Website unlimited halaman',
