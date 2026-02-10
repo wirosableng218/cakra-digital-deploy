@@ -199,6 +199,9 @@ function App() {
               </Link>
             </li>
             <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
               <Link to="/client">Client</Link>
             </li>
             <li>
@@ -246,6 +249,9 @@ function App() {
                 <li><Link to="/pricing?tab=photography" onClick={() => setMobileOpen(false)}>Jasa Fotografi</Link></li>
                 <li><Link to="/pricing?tab=consulting" onClick={() => setMobileOpen(false)}>Konsultasi Digital</Link></li>
               </ul>
+            </li>
+            <li>
+              <Link to="/portfolio" onClick={() => setMobileOpen(false)}>Portfolio</Link>
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>

@@ -291,6 +291,9 @@ function Pricing() {
               </ul>
             </li>
             <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
               <Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
@@ -338,6 +341,9 @@ function Pricing() {
             </li>
             <li>
               <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
+            </li>
+            <li>
+              <Link to="/portfolio" onClick={() => setMobileOpen(false)}>Portfolio</Link>
             </li>
             <li>
               <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>

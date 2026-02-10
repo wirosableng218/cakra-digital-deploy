@@ -109,6 +109,9 @@ function Consultation() {
               </ul>
             </li>
             <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
               <Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>

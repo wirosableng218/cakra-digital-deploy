@@ -130,7 +130,14 @@ function SEO() {
                 <li><Link to="/pricing?tab=software" onClick={() => setDesktopServicesOpen(false)}>Software Installation</Link></li>
               </ul>
             </li>
-            <li><Link to="/tentang">Tentang Kami</Link>
+            <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
+              <Link to="/tentang">Tentang Kami</Link>
             </li>
             <li>
               <Link to="/client">Client</Link>

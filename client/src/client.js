@@ -225,18 +225,6 @@ function Client() {
                 Layanan
               </button>
               <ul className="submenu">
-                <li><Link to="/pricing?tab=website" onClick={() => setDesktopServicesOpen(false)}>Jasa Pembuatan Website</Link></li>
-                <li><Link to="/seo" onClick={() => setDesktopServicesOpen(false)}>SEO Bergaransi</Link></li>
-                <li><Link to="/consultation" onClick={() => setDesktopServicesOpen(false)}>Pembuatan Aplikasi</Link></li>
-                <li><Link to="/pricing?tab=software" onClick={() => setDesktopServicesOpen(false)}>Software Installation</Link></li>
-              </ul>
-            </li>
-            <li><Link to="/tentang">Tentang Kami</Link>
-            </li>
-            <li>
-              <Link to="/client">Client</Link>
-            </li>
-            <li>
               <Link to="/consultation">Contact</Link>
             </li>
             <li className="mode-item">
