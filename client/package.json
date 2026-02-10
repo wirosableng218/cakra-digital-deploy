@@ -21,8 +21,6 @@
   "scripts": {
     "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
-    "vercel-build": "react-scripts build",
-    "setup-openai": "node setup-openai.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
