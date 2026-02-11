@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import SEOHead from './components/SEOHead';
-import CTASection from './components/CTASection';
 import './App.css';
-import './components/CTASection.css';
-import FeedbackForm from './FeedbackForm'; // Komponen form feedback
+import FeedbackForm from './FeedbackForm';
 
 function App() {
   const [data, setData] = useState([]);
@@ -19,11 +16,7 @@ function App() {
     const onResize = () => { if (window.innerWidth >= 901) setMobileOpen(false); };
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
-    if (mobileOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+    if (mobileOpen) document.body.classList.add('no-scroll'); else document.body.classList.remove('no-scroll');
     return () => {
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('resize', onResize);
@@ -48,105 +41,45 @@ function App() {
     };
   }, []);
 
-  useEffect(() => {
-    fetch('/api/data')
-      .then(async (response) => {
-        const contentType = response.headers.get('content-type') || '';
-        if (!response.ok || !contentType.includes('application/json')) {
-          const text = await response.text().catch(() => '');
-          console.error('API not OK/JSON', {
-            status: response.status,
-            statusText: response.statusText,
-            contentType,
-            snippet: (text || '').slice(0, 200)
-          });
-          return [];
-        }
-        return response.json();
-      })
-      .then((data) => setData(Array.isArray(data) ? data : []))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
+  useEffect(() => { if (!mobileOpen) setServicesOpen(false); }, [mobileOpen]);
 
-  // Sync active social theme icon based on current theme
-  useEffect(() => {
-    const theme = document.documentElement.getAttribute('data-theme');
-    const footer = document.querySelector('.footer');
-    if (!footer) return;
-    const icons = footer.querySelectorAll('.socials a');
-    icons.forEach(a => a.classList.remove('is-active'));
-    if (theme) {
-      const active = footer.querySelector(`.socials a.${theme}`);
-      if (active) active.classList.add('is-active');
+  const scrollToSection = (section) => {
+    setActiveSection(section);
+    const element = document.getElementById(section);
+    if (element) {
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const elementPosition = element.offsetTop - headerHeight - 20;
+      window.scrollTo({ top: elementPosition, behavior: 'smooth' });
     }
-  }, []);
-
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-    setActiveSection(sectionId);
-    setMobileOpen(false);
   };
 
-  const wmRef = useRef(null);
-
+  // Global theme and mode functions
   useEffect(() => {
-    const el = wmRef.current;
-    if (!el) return;
-    const supportsMask =
-      (typeof CSS !== 'undefined' && CSS.supports && (CSS.supports('mask-image', 'url("")') || CSS.supports('-webkit-mask-image', 'url("")')));
-    if (!supportsMask) {
-      el.classList.add('no-mask');
-      el.style.backgroundImage = `url(${process.env.PUBLIC_URL}/images/sampul-cover.png)`;
-      el.style.backgroundRepeat = 'no-repeat';
-      el.style.backgroundPosition = 'center';
-      el.style.backgroundSize = 'contain';
-      el.style.backgroundColor = 'transparent';
-    }
-  }, []);
-
-  // Hide watermark PAS saat mencapai heading "Layanan Kami"
-  useEffect(() => {
-    const handleScroll = () => {
-      const watermark = wmRef.current;
-      const servicesSection = document.querySelector('#services');
-      if (!watermark || !servicesSection) return;
-
-      // Cari heading "Layanan Kami" secara spesifik
-      const layananHeading = Array.from(document.querySelectorAll('h2')).find(h2 => 
-        h2.textContent.trim() === 'Layanan Kami'
-      );
-      
-      if (!layananHeading) return;
-
-      const headingTop = layananHeading.getBoundingClientRect().top;
-      
-      // Hide watermark PAS saat heading "Layanan Kami" terlihat (tepat di batas)
-      if (headingTop <= window.innerHeight * 0.1) { // 10% dari viewport height
-        watermark.style.opacity = '0';
-        watermark.style.visibility = 'hidden';
-      } else {
-        watermark.style.opacity = '1';
-        watermark.style.visibility = 'visible';
-      }
+    window.__setAppTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      const buttons = document.querySelectorAll('.socials button, .theme-selector button');
+      buttons.forEach(btn => {
+        btn.classList.remove('is-active');
+        if (btn.classList.contains(theme)) btn.classList.add('is-active');
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial position
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+    window.__setAppMode = (mode) => {
+      document.documentElement.setAttribute('data-mode', mode);
+      localStorage.setItem('mode', mode);
     };
+
+    // Apply saved theme and mode on load
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    const savedMode = localStorage.getItem('mode') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.documentElement.setAttribute('data-mode', savedMode);
   }, []);
 
   return (
-    <>
-      <SEOHead 
-        title="Jasa Pembuatan Website & SEO Bergaransi - Cakra Digital Innovation"
-        description="Cakra Digital Innovation menyediakan jasa pembuatan website profesional, SEO bergaransi, pembuatan aplikasi, dan instalasi software untuk bisnis modern di Indonesia. Solusi digital terintegrasi dengan harga terjangkau."
-        keywords="jasa pembuatan website, SEO bergaransi, pembuatan aplikasi, instalasi software, website development, digital marketing, web design, aplikasi mobile, software development, Tangerang, Jakarta, Indonesia"
-        canonicalUrl="/"
-      />
-      <div className="App">
+    <div className="App">
       <header className="header">
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
@@ -163,6 +96,7 @@ function App() {
             </div>
           </Link>
         </div>
+
         <button
           className={`hamburger ${mobileOpen ? 'is-active' : ''}`}
           aria-label="Toggle navigation"
@@ -174,6 +108,7 @@ function App() {
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
+
         <nav className="nav">
           <ul>
             <li className={activeSection === 'home' ? 'active' : ''}>
@@ -189,33 +124,30 @@ function App() {
                 type="button"
                 className="submenu-toggle-desktop"
                 aria-expanded={desktopServicesOpen}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setDesktopServicesOpen(!desktopServicesOpen);
-                }}
+                onClick={(e) => { e.stopPropagation(); setDesktopServicesOpen(!desktopServicesOpen); }}
               >
                 Layanan
               </button>
               <ul className="submenu">
-                <li><Link to="/pricing?tab=website" onClick={() => setDesktopServicesOpen(false)}>Jasa Pembuatan Website</Link></li>
-                <li><Link to="/seo" onClick={() => setDesktopServicesOpen(false)}>SEO Bergaransi</Link></li>
-                <li><Link to="/consultation" onClick={() => setDesktopServicesOpen(false)}>Pembuatan Aplikasi</Link></li>
-                <li><Link to="/pricing?tab=software" onClick={() => setDesktopServicesOpen(false)}>Software Installation</Link></li>
+                <li><Link to="/pricing?tab=website">Jasa Pembuatan Website</Link></li>
+                <li><Link to="/seo">SEO Bergaransi</Link></li>
+                <li><Link to="/consultation">Pembuatan Aplikasi</Link></li>
+                <li><Link to="/pricing?tab=software">Software Installation</Link></li>
               </ul>
             </li>
-            <li>
-              <Link to="/tentang">
-                Tentang Kami
-              </Link>
-            </li>
-            <li>
+            <li className={activeSection === 'portfolio' ? 'active' : ''}>
               <Link to="/portfolio">Portfolio</Link>
             </li>
-            <li>
-              <Link to="/client">Client</Link>
+            <li className={activeSection === 'about' ? 'active' : ''}>
+              <a
+                href="#tentang"
+                onClick={() => scrollToSection('tentang')}
+              >
+                Tentang Kami
+              </a>
             </li>
-            <li>
-              <Link to="/consultation">Contact</Link>
+            <li className={activeSection === 'clients' ? 'active' : ''}>
+              <Link to="/client">Klien</Link>
             </li>
             <li className="mode-item">
               <button
@@ -234,6 +166,7 @@ function App() {
             </li>
           </ul>
         </nav>
+
         <div
           id="mobile-nav"
           className={`mobile-nav ${mobileOpen ? 'open' : ''}`}
@@ -245,32 +178,32 @@ function App() {
         >
           <ul>
             <li className={activeSection === 'home' ? 'active' : ''}>
-              <a href="#home" onClick={() => scrollToSection('home')}>Home</a>
+              <a href="#home" onClick={() => { scrollToSection('home'); setMobileOpen(false); }}>Home</a>
             </li>
-            <li className={`has-sub ${activeSection === 'services' ? 'active' : ''}`}>
-              <button type="button" className="submenu-toggle" aria-expanded={servicesOpen} onClick={() => setServicesOpen(!servicesOpen)}>Layanan</button>
+            <li className="has-sub">
+              <button
+                type="button"
+                className="submenu-toggle"
+                aria-expanded={servicesOpen}
+                onClick={() => setServicesOpen(!servicesOpen)}
+              >
+                Layanan
+              </button>
               <ul className={`submenu ${servicesOpen ? 'open' : ''}`}>
                 <li><Link to="/pricing?tab=website" onClick={() => setMobileOpen(false)}>Jasa Pembuatan Website</Link></li>
                 <li><Link to="/seo" onClick={() => setMobileOpen(false)}>SEO Bergaransi</Link></li>
                 <li><Link to="/consultation" onClick={() => setMobileOpen(false)}>Pembuatan Aplikasi</Link></li>
                 <li><Link to="/pricing?tab=software" onClick={() => setMobileOpen(false)}>Software Installation</Link></li>
-                <li><Link to="/pricing?tab=design" onClick={() => setMobileOpen(false)}>Desain Grafis</Link></li>
-                <li><Link to="/pricing?tab=video" onClick={() => setMobileOpen(false)}>Produksi Video</Link></li>
-                <li><Link to="/pricing?tab=photography" onClick={() => setMobileOpen(false)}>Jasa Fotografi</Link></li>
-                <li><Link to="/pricing?tab=consulting" onClick={() => setMobileOpen(false)}>Konsultasi Digital</Link></li>
               </ul>
             </li>
-            <li>
+            <li className={activeSection === 'portfolio' ? 'active' : ''}>
               <Link to="/portfolio" onClick={() => setMobileOpen(false)}>Portfolio</Link>
             </li>
-            <li>
-              <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
+            <li className={activeSection === 'about' ? 'active' : ''}>
+              <a href="#tentang" onClick={() => { scrollToSection('tentang'); setMobileOpen(false); }}>Tentang Kami</a>
             </li>
-            <li>
-              <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>
-            </li>
-            <li>
-              <Link to="/consultation">Contact</Link>
+            <li className={activeSection === 'clients' ? 'active' : ''}>
+              <Link to="/client" onClick={() => setMobileOpen(false)}>Klien</Link>
             </li>
             <li className="mode-item">
               <button
@@ -290,87 +223,139 @@ function App() {
         </div>
       </header>
 
-      <main>
-        <section
-          id="home"
-          className="hero"
-        >
-          <div
-            aria-hidden="true"
-            className="hero-watermark"
-            ref={wmRef}
-            style={{
-              backgroundImage: `url(${process.env.PUBLIC_URL}/images/sampul-cover.png)`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover'
-            }}
-          />
-          <div className="hero-content">
-            <h2>Selamat Datang di Jasa Pembuatan Website & Instalasi Software</h2>
-            <p>Kami menyediakan solusi digital yang inovatif, profesional, dan terpercaya untuk bisnis Anda.</p>
-            <div className="hero-buttons">
-              <Link className="cta-button primary" to="/pricing">
-                Lihat Harga
-              </Link>
-              <button
-                className="cta-button secondary"
-                onClick={() => scrollToSection('services')}
-              >
-                Pelajari Layanan
-              </button>
+      <main className="main">
+        <section id="home" className="hero">
+          <div className="hero__inner">
+            <div className="hero__content">
+              <h1 className="hero__title">
+                Jasa Pembuatan Website & SEO Bergaransi
+                <span className="hero__title-accent"> Profesional</span>
+              </h1>
+              <p className="hero__subtitle">
+                Solusi digital terintegrasi untuk bisnis modern di Indonesia. Website berkualitas, SEO terjamin, aplikasi custom, dan instalasi software profesional.
+              </p>
+              <div className="hero__actions">
+                <Link to="/consultation" className="btn btn--primary">
+                  <span className="btn__icon">💬</span>
+                  <span>Konsultasi Gratis</span>
+                </Link>
+                <Link to="/pricing?tab=website" className="btn btn--secondary">
+                  <span className="btn__icon">📋</span>
+                  <span>Lihat Paket Harga</span>
+                </Link>
+              </div>
+            </div>
+            <div className="hero__visual">
+              <div className="hero__card">
+                <div className="hero__card-header">
+                  <div className="hero__card-icon">🚀</div>
+                  <div className="hero__card-title">Digital Solution</div>
+                </div>
+                <div className="hero__card-content">
+                  <div className="hero__stat">
+                    <div className="hero__stat-number">500+</div>
+                    <div className="hero__stat-label">Proyek Selesai</div>
+                  </div>
+                  <div className="hero__stat">
+                    <div className="hero__stat-number">100%</div>
+                    <div className="hero__stat-label">Kepuasan Klien</div>
+                  </div>
+                  <div className="hero__stat">
+                    <div className="hero__stat-number">24/7</div>
+                    <div className="hero__stat-label">Support</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="services"
-          className="services"
-        >
-          <h2>Layanan Kami</h2>
-          <div className="service-grid">
-            <Link to="/pricing?tab=website" className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h3>Jasa Pembuatan Website</h3>
-              <p>Pembuatan website modern, cepat, dan mobile-friendly untuk bisnis Anda.</p>
-            </Link>
-            <Link to="/seo" className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h3>SEO Bergaransi</h3>
-              <p>Optimasi mesin pencari dengan target hasil yang terukur dan bergaransi.</p>
-            </Link>
-            <Link to="/consultation" className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h3>Pembuatan Aplikasi</h3>
-              <p>Pengembangan aplikasi web dan mobile sesuai kebutuhan operasional Anda.</p>
-            </Link>
-            <Link to="/pricing?tab=software" className="service-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h3>Software Installation</h3>
-              <p>Layanan instalasi dan konfigurasi software yang aman dan efisien.</p>
-            </Link>
+        <section id="services" className="services">
+          <div className="services__inner">
+            <div className="section-header">
+              <h2 className="section-title">Layanan Kami</h2>
+              <p className="section-subtitle">Solusi digital lengkap untuk kebutuhan bisnis Anda</p>
+            </div>
+            <div className="services__grid">
+              <div className="service-card">
+                <div className="service-card__icon">🌐</div>
+                <h3 className="service-card__title">Jasa Pembuatan Website</h3>
+                <p className="service-card__description">Website profesional, responsif, dan SEO-friendly untuk meningkatkan kehadiran online bisnis Anda.</p>
+                <Link to="/pricing?tab=website" className="service-card__link">Pelajari Lebih Lanjut</Link>
+              </div>
+              <div className="service-card">
+                <div className="service-card__icon">🔍</div>
+                <h3 className="service-card__title">SEO Bergaransi</h3>
+                <p className="service-card__description">Optimasi mesin pencari dengan garansi ranking untuk meningkatkan traffic dan konversi.</p>
+                <Link to="/seo" className="service-card__link">Pelajari Lebih Lanjut</Link>
+              </div>
+              <div className="service-card">
+                <div className="service-card__icon">📱</div>
+                <h3 className="service-card__title">Pembuatan Aplikasi</h3>
+                <p className="service-card__description">Aplikasi mobile dan desktop custom sesuai kebutuhan bisnis Anda.</p>
+                <Link to="/consultation" className="service-card__link">Pelajari Lebih Lanjut</Link>
+              </div>
+              <div className="service-card">
+                <div className="service-card__icon">⚙️</div>
+                <h3 className="service-card__title">Software Installation</h3>
+                <p className="service-card__description">Instalasi dan konfigurasi software untuk meningkatkan produktivitas bisnis.</p>
+                <Link to="/pricing?tab=software" className="service-card__link">Pelajari Lebih Lanjut</Link>
+              </div>
+            </div>
           </div>
-          <h3>Data Layanan dari Backend:</h3>
-          <ul className="data-list">
-            {data.map((item) => (
-              <li key={item.id}>{item.name}</li>
-            ))}
-          </ul>
         </section>
 
-
-        <section
-          id="contact"
-          className="contact"
-        >
-          <h2>Hubungi Kami</h2>
-          <p>Email: cdiyunoru@gmail.com | Telepon: +6285852345718</p>
-          <FeedbackForm />
+        <section id="tentang" className="about">
+          <div className="about__inner">
+            <div className="about__content">
+              <div className="section-header">
+                <h2 className="section-title">Tentang Cakra Digital Innovation</h2>
+                <p className="section-subtitle">Partner digital terpercaya untuk bisnis modern</p>
+              </div>
+              <div className="about__text">
+                <p>
+                  Cakra Digital Innovation adalah perusahaan teknologi yang berfokus pada penyediaan solusi digital terintegrasi untuk bisnis di Indonesia. Dengan pengalaman lebih dari 5 tahun, kami telah membantu ratusan klien dari berbagai industri untuk mengembangkan kehadiran digital mereka.
+                </p>
+                <p>
+                  Kami mengkhususkan diri dalam jasa pembuatan website profesional, SEO bergaransi, pengembangan aplikasi custom, dan instalasi software. Setiap proyek dikerjakan oleh tim profesional yang berpengalaman dan menggunakan teknologi terkini untuk memastikan hasil terbaik.
+                </p>
+              </div>
+              <div className="about__stats">
+                <div className="stat-item">
+                  <div className="stat-number">500+</div>
+                  <div className="stat-label">Proyek Selesai</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">100%</div>
+                  <div className="stat-label">Kepuasan Klien</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">5+</div>
+                  <div className="stat-label">Tahun Pengalaman</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <CTASection 
-          title="Siap Membangun Kehadiran Digital Anda?"
-          subtitle="Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda."
-          primaryText="Konsultasi Gratis"
-          secondaryText="Lihat Paket Kami"
-        />
-
+        <section className="cta">
+          <div className="cta__inner">
+            <div className="cta__content">
+              <h2 className="cta__title">Siap Membangun Kehadiran Digital Anda?</h2>
+              <p className="cta__subtitle">Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda.</p>
+              <div className="cta__actions">
+                <Link to="/consultation" className="btn btn--primary">
+                  <span className="btn__icon">💬</span>
+                  <span>Konsultasi Gratis</span>
+                </Link>
+                <Link to="/pricing?tab=website" className="btn btn--secondary">
+                  <span className="btn__icon">📋</span>
+                  <span>Lihat Paket Kami</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="footer" aria-label="Situs Footer">
@@ -381,78 +366,33 @@ function App() {
           </div>
 
           <div className="footer-links">
-            <div className="footer-col">
+            <div className="footer-column">
               <h4>Layanan</h4>
               <ul>
                 <li><Link to="/pricing?tab=website">Jasa Pembuatan Website</Link></li>
                 <li><Link to="/seo">SEO Bergaransi</Link></li>
-                <li><Link to="/pricing?tab=apps">Pembuatan Aplikasi</Link></li>
+                <li><Link to="/consultation">Pembuatan Aplikasi</Link></li>
                 <li><Link to="/pricing?tab=software">Software Installation</Link></li>
               </ul>
             </div>
 
-            <div className="footer-col">
-              <h4>Navigasi</h4>
+            <div className="footer-column">
+              <h4>Perusahaan</h4>
               <ul>
-                <li><a href="#home" onClick={() => scrollToSection('home')}>Home</a></li>
-                <li><a href="#services" onClick={() => scrollToSection('services')}>Services</a></li>
-                <li><Link to="/consultation">Contact</Link></li>
+                <li><Link to="/tentang">Tentang Kami</Link></li>
+                <li><Link to="/portfolio">Portfolio</Link></li>
+                <li><Link to="/client">Klien</Link></li>
+                <li><Link to="/consultation">Kontak</Link></li>
               </ul>
             </div>
 
-            <div className="footer-col">
-              <h4>Kontak</h4>
-              <ul className="contact-list">
+            <div className="footer-column">
+              <h4>Hubungi Kami</h4>
+              <ul>
+                <li><a href="tel:+6285852345718">+62 858-5234-5718</a></li>
                 <li><a href="mailto:cdiyunoru@gmail.com">cdiyunoru@gmail.com</a></li>
-                <li><a href="tel:+6285852345718">+6285852345718</a></li>
-                <li>Tangerang Banten, Indonesia</li>
+                <li><a href="https://wa.me/6285852345718" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
               </ul>
-            </div>
-
-            <div className="footer-col">
-              <h4>Berlangganan</h4>
-              <form className="newsletter" onSubmit={(e) => e.preventDefault()} aria-label="Form Newsletter">
-                <input type="email" placeholder="Email Anda" aria-label="Email" required />
-                <button type="submit" className="newsletter-btn">Kirim</button>
-              </form>
-              <div className="socials" aria-label="Sosial Media">
-                <button
-                  type="button"
-                  className="whatsapp"
-                  aria-label="WhatsApp"
-                  onClick={(e) => {
-                    window.__setAppTheme && window.__setAppTheme('whatsapp');
-                    const parent = e.currentTarget.closest('.socials');
-                    parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active'));
-                    e.currentTarget.classList.add('is-active');
-                    console.log('Clicked theme', 'whatsapp', document.documentElement.getAttribute('data-theme'));
-                  }}
-                >🟢</button>
-                <button
-                  type="button"
-                  className="instagram"
-                  aria-label="Instagram"
-                  onClick={(e) => {
-                    window.__setAppTheme && window.__setAppTheme('instagram');
-                    const parent = e.currentTarget.closest('.socials');
-                    parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active'));
-                    e.currentTarget.classList.add('is-active');
-                    console.log('Clicked theme', 'instagram', document.documentElement.getAttribute('data-theme'));
-                  }}
-                >🟣</button>
-                <button
-                  type="button"
-                  className="linkedin"
-                  aria-label="LinkedIn"
-                  onClick={(e) => {
-                    window.__setAppTheme && window.__setAppTheme('linkedin');
-                    const parent = e.currentTarget.closest('.socials');
-                    parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active'));
-                    e.currentTarget.classList.add('is-active');
-                    console.log('Clicked theme', 'linkedin', document.documentElement.getAttribute('data-theme'));
-                  }}
-                >🔵</button>
-              </div>
             </div>
           </div>
         </div>
@@ -466,9 +406,10 @@ function App() {
           </div>
         </div>
       </footer>
+
+      <FeedbackForm />
     </div>
-    </>
   );
-};
+}
 
 export default App;
