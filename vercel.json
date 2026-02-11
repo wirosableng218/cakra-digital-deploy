@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "cakra-digital-production",
   "builds": [
     {
       "src": "client/package.json",
@@ -25,10 +26,6 @@
     {
       "src": "/api/(.*)",
       "dest": "/api/$1"
-    },
-    {
-      "src": "/payment",
-      "dest": "/client/index.html"
     },
     {
       "src": "/(.*)",

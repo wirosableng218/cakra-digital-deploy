@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import SEOHead from './components/SEOHead';
-import CTASection from './components/CTASection';
 import './App.css';
 import './Portfolio.css';
-import './components/CTASection.css';
 
 function Portfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,7 +18,7 @@ function Portfolio() {
       category: 'website',
       client: 'Fashion Store Indonesia',
       description: 'Platform e-commerce modern dengan fitur lengkap untuk fashion retail online.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
+      image: '/images/ampul_Cakra_Digital_Innovation.png',
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       features: [
         'Shopping cart & checkout',
@@ -39,7 +36,7 @@ function Portfolio() {
       category: 'website',
       client: 'Klinik Sehat Sejahtera',
       description: 'Website profil klinik dengan sistem appointment booking dan manajemen pasien.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
+      image: '/images/ampul_Cakra_Digital_Innovation.png',
       tags: ['React', 'Firebase', 'Tailwind CSS', 'Google Calendar'],
       features: [
         'Online appointment booking',
@@ -57,7 +54,7 @@ function Portfolio() {
       category: 'application',
       client: 'Logistik Cepat Indonesia',
       description: 'Aplikasi tracking armada real-time dengan dashboard analytics dan otomatisasi laporan.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
+      image: '/images/ampul_Cakra_Digital_Innovation.png',
       tags: ['React Native', 'Node.js', 'PostgreSQL', 'Google Maps'],
       features: [
         'Real-time GPS tracking',
@@ -68,75 +65,30 @@ function Portfolio() {
       ],
       color: '#3B82F6',
       year: '2023'
-    },
-    {
-      id: 4,
-      title: 'Kursus Online',
-      category: 'website',
-      client: 'EduTech Indonesia',
-      description: 'Platform LMS (Learning Management System) dengan integrasi pembayaran dan video conference.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
-      tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'WebRTC'],
-      features: [
-        'Video conference integration',
-        'Payment gateway',
-        'Course management',
-        'Student progress tracking',
-        'Certificate generation'
-      ],
-      color: '#8B5CF6',
-      year: '2023'
-    },
-    {
-      id: 5,
-      title: 'Manufacturing ERP',
-      category: 'application',
-      client: 'PT. Manufaktur Maju',
-      description: 'Sistem ERP terintegrasi untuk manajemen produksi, inventory, dan distribusi.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
-      tags: ['Vue.js', 'Python', 'Django', 'PostgreSQL'],
-      features: [
-        'Production planning',
-        'Inventory management',
-        'Quality control',
-        'Supply chain management',
-        'Business intelligence'
-      ],
-      color: '#6366F1',
-      year: '2023'
-    },
-    {
-      id: 6,
-      title: 'Restaurant Management',
-      category: 'website',
-      client: 'Warung Nusantara',
-      description: 'Website restoran dengan sistem pemesanan online, manajemen menu, dan tracking delivery.',
-      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
-      tags: ['React', 'Node.js', 'MongoDB', 'Google Maps API'],
-      features: [
-        'Online ordering system',
-        'Menu management',
-        'Delivery tracking',
-        'Customer reviews',
-        'Table reservation'
-      ],
-      color: '#F59E0B',
-      year: '2024'
     }
   ];
 
-  const categories = ['all', 'website', 'application'];
+  const categories = [
+    { id: 'all', name: 'Semua', icon: '🎯' },
+    { id: 'website', name: 'Website', icon: '🌐' },
+    { id: 'application', name: 'Aplikasi', icon: '📱' }
+  ];
 
+  const filteredProjects = filter === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === filter);
+
+  const toggleProjectExpansion = (projectId) => {
+    setExpandedProject(expandedProject === projectId ? null : projectId);
+  };
+
+  // Handle ESC key, resize, and lock body scroll for mobile drawer
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') setMobileOpen(false); };
     const onResize = () => { if (window.innerWidth >= 901) setMobileOpen(false); };
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
-    if (mobileOpen) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+    if (mobileOpen) document.body.classList.add('no-scroll'); else document.body.classList.remove('no-scroll');
     return () => {
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('resize', onResize);
@@ -144,6 +96,7 @@ function Portfolio() {
     };
   }, [mobileOpen]);
 
+  // Close desktop submenu on outside click or ESC
   useEffect(() => {
     const onDocClick = (e) => {
       const nav = document.querySelector('.header .nav');
@@ -162,24 +115,8 @@ function Portfolio() {
 
   useEffect(() => { if (!mobileOpen) setServicesOpen(false); }, [mobileOpen]);
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
-
-  const toggleProjectExpansion = (projectId) => {
-    setExpandedProject(expandedProject === projectId ? null : projectId);
-  };
-
   return (
-    <>
-      <SEOHead 
-        title="Portfolio - Karya Digital Terbaik | Cakra Digital Innovation"
-        description="Lihat portfolio proyek digital terbaik kami: website, aplikasi, dan solusi digital untuk bisnis modern. Karya inovatif dengan teknologi terkini."
-        keywords="portfolio digital, karya website, proyek aplikasi, solusi digital, web development, aplikasi mobile, Tangerang, Jakarta, Indonesia"
-        canonicalUrl="/portfolio"
-        ogImage="/images/portfolio/ecommerce-fashion.jpg"
-      />
-      <div className="App portfolio-page">
+    <div className="App portfolio-page">
       <header className="header">
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
@@ -196,6 +133,7 @@ function Portfolio() {
             </div>
           </Link>
         </div>
+
         <button
           className={`hamburger ${mobileOpen ? 'is-active' : ''}`}
           aria-label="Toggle navigation"
@@ -207,6 +145,7 @@ function Portfolio() {
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
+
         <nav className="nav">
           <ul>
             <li>
@@ -222,23 +161,14 @@ function Portfolio() {
                 Layanan
               </button>
               <ul className="submenu">
-                <li><Link to="/pricing?tab=website" onClick={() => setDesktopServicesOpen(false)}>Jasa Pembuatan Website</Link></li>
-                <li><Link to="/seo" onClick={() => setDesktopServicesOpen(false)}>SEO Bergaransi</Link></li>
-                <li><Link to="/consultation" onClick={() => setDesktopServicesOpen(false)}>Pembuatan Aplikasi</Link></li>
-                <li><Link to="/pricing?tab=software" onClick={() => setDesktopServicesOpen(false)}>Software Installation</Link></li>
+                <li><Link to="/consultation">Contact</Link></li>
               </ul>
             </li>
             <li>
-              <Link to="/portfolio" className="active">Portfolio</Link>
+              <Link to="/portfolio">Portfolio</Link>
             </li>
             <li>
               <Link to="/tentang">Tentang Kami</Link>
-            </li>
-            <li>
-              <Link to="/client">Client</Link>
-            </li>
-            <li>
-              <Link to="/consultation">Contact</Link>
             </li>
             <li className="mode-item">
               <button
@@ -257,6 +187,7 @@ function Portfolio() {
             </li>
           </ul>
         </nav>
+
         <div
           id="mobile-nav"
           className={`mobile-nav ${mobileOpen ? 'open' : ''}`}
@@ -265,11 +196,16 @@ function Portfolio() {
           onClick={(e) => { if (e.target.id === 'mobile-nav') setMobileOpen(false); }}
         >
           <ul>
-            <li>
-              <Link to="/" onClick={() => setMobileOpen(false)}>Home</Link>
-            </li>
+            <li><Link to="/" onClick={() => setMobileOpen(false)}>Home</Link></li>
             <li className="has-sub">
-              <button type="button" className="submenu-toggle" aria-expanded={servicesOpen} onClick={() => setServicesOpen(!servicesOpen)}>Layanan</button>
+              <button
+                type="button"
+                className="submenu-toggle"
+                aria-expanded={servicesOpen}
+                onClick={() => setServicesOpen(!servicesOpen)}
+              >
+                Layanan
+              </button>
               <ul className={`submenu ${servicesOpen ? 'open' : ''}`}>
                 <li><Link to="/pricing?tab=website" onClick={() => setMobileOpen(false)}>Jasa Pembuatan Website</Link></li>
                 <li><Link to="/seo" onClick={() => setMobileOpen(false)}>SEO Bergaransi</Link></li>
@@ -277,17 +213,11 @@ function Portfolio() {
                 <li><Link to="/pricing?tab=software" onClick={() => setMobileOpen(false)}>Software Installation</Link></li>
               </ul>
             </li>
-            <li>
-              <Link to="/portfolio" onClick={() => setMobileOpen(false)} className="active">Portfolio</Link>
+            <li><Link to="/portfolio" onClick={() => setMobileOpen(false)}>Portfolio</Link></li>
+            <li><Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami
+            </Link>
             </li>
-            <li>
-              <Link to="/tentang" onClick={() => setMobileOpen(false)}>Tentang Kami</Link>
-            </li>
-            <li>
-              <Link to="/client" onClick={() => setMobileOpen(false)}>Client</Link>
-            </li>
-            <li>
-              <Link to="/consultation" onClick={() => setMobileOpen(false)}>Contact</Link>
+            <li><Link to="/consultation" onClick={() => setMobileOpen(false)}>Contact</Link>
             </li>
             <li className="mode-item">
               <button
@@ -324,8 +254,8 @@ function Portfolio() {
                   <div className="stat-label">Kepuasan Klien</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">A+</div>
-                  <div className="stat-label">Kualitas Premium</div>
+                  <div className="stat-number">5+</div>
+                  <div className="stat-label">Tahun Pengalaman</div>
                 </div>
               </div>
             </div>
@@ -338,13 +268,12 @@ function Portfolio() {
             <div className="filter-buttons">
               {categories.map(category => (
                 <button
-                  key={category}
-                  className={`filter-btn ${filter === category ? 'active' : ''}`}
-                  onClick={() => setFilter(category)}
+                  key={category.id}
+                  className={`filter-btn ${filter === category.id ? 'active' : ''}`}
+                  onClick={() => setFilter(category.id)}
                 >
-                  {category === 'all' ? 'Semua' : 
-                   category === 'website' ? 'Website' : 
-                   category === 'application' ? 'Aplikasi' : category}
+                  <span className="filter-icon">{category.icon}</span>
+                  <span className="filter-text">{category.name}</span>
                 </button>
               ))}
             </div>
@@ -353,12 +282,8 @@ function Portfolio() {
 
         <section className="portfolio-grid">
           <div className="portfolio-grid__inner">
-            {filteredProjects.map((project, index) => (
-              <article 
-                key={project.id} 
-                className={`portfolio-card ${expandedProject === project.id ? 'expanded' : ''}`}
-                style={{ '--accent-color': project.color }}
-              >
+            {filteredProjects.map(project => (
+              <article key={project.id} className="portfolio-card">
                 <div className="portfolio-card__image-container">
                   <img 
                     src={`${process.env.PUBLIC_URL}${project.image}`}
@@ -368,8 +293,14 @@ function Portfolio() {
                     decoding="async"
                   />
                   <div className="portfolio-card__overlay">
-                    <div className="portfolio-card__category">{project.category}</div>
-                    <div className="portfolio-card__year">{project.year}</div>
+                    <button
+                      className="portfolio-card__expand-btn"
+                      onClick={() => toggleProjectExpansion(project.id)}
+                      aria-expanded={expandedProject === project.id}
+                      aria-label={`Expand ${project.title} details`}
+                    >
+                      <span className="expand-icon">{expandedProject === project.id ? '✕' : '+'}</span>
+                    </button>
                   </div>
                 </div>
                 
@@ -386,43 +317,50 @@ function Portfolio() {
                       <span key={tagIndex} className="tag">{tag}</span>
                     ))}
                   </div>
-                  
-                  <div className="portfolio-card__features">
-                    <h4>Fitur Utama:</h4>
-                    <ul>
-                      {project.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="feature-item">
-                          <span className="check-icon">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="portfolio-card__actions">
-                    <button 
-                      className="btn-details"
-                      onClick={() => toggleProjectExpansion(project.id)}
-                    >
-                      {expandedProject === project.id ? 'Tutup Detail' : 'Lihat Detail'}
-                    </button>
-                    <Link to="/consultation" className="btn-contact">
-                      Diskusi Proyek Serupa
-                    </Link>
-                  </div>
+
+                  {expandedProject === project.id && (
+                    <div className="portfolio-card__details">
+                      <h4>Fitur Utama:</h4>
+                      <ul>
+                        {project.features.map((feature, featureIndex) => (
+                          <li key={featureIndex}>{feature}</li>
+                        ))}
+                      </ul>
+                      <div className="portfolio-card__meta">
+                        <span className="year">Tahun: {project.year}</span>
+                        <span className="category" style={{ backgroundColor: project.color }}>
+                          {project.category === 'website' ? 'Website' : 'Aplikasi'}
+                        </span>
+                      </div>
+                      <div className="portfolio-card__actions">
+                        <Link to="/consultation" className="btn-contact">
+                          Diskusi Proyek Serupa
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <CTASection 
-          title="Siap Mewujudkan Proyek Impian Anda?"
-          subtitle="Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda."
-          primaryText="Konsultasi Gratis"
-          secondaryText="Lihat Paket Kami"
-        />
-
+        <section className="portfolio-cta">
+          <div className="portfolio-cta__inner">
+            <h2 className="cta-title">Siap Mewujudkan Proyek Impian Anda?</h2>
+            <p className="cta-subtitle">Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda.</p>
+            <div className="cta-actions">
+              <Link to="/consultation" className="cta-btn cta-btn--primary">
+                <span className="cta-btn-icon">💬</span>
+                <span>Konsultasi Gratis</span>
+              </Link>
+              <Link to="/pricing?tab=website" className="cta-btn cta-btn--secondary">
+                <span className="cta-btn-icon">📋</span>
+                <span>Lihat Paket Kami</span>
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="footer" aria-label="Situs Footer">
@@ -433,7 +371,7 @@ function Portfolio() {
           </div>
 
           <div className="footer-links">
-            <div className="footer-col">
+            <div className="footer-column">
               <h4>Layanan</h4>
               <ul>
                 <li><Link to="/pricing?tab=website">Jasa Pembuatan Website</Link></li>
@@ -443,35 +381,23 @@ function Portfolio() {
               </ul>
             </div>
 
-            <div className="footer-col">
-              <h4>Navigasi</h4>
+            <div className="footer-column">
+              <h4>Perusahaan</h4>
               <ul>
-                <li><Link to="/">Home</Link></li>
+                <li><Link to="/tentang">Tentang Kami</Link></li>
                 <li><Link to="/portfolio">Portfolio</Link></li>
-                <li><Link to="/consultation">Contact</Link></li>
+                <li><Link to="/client">Klien</Link></li>
+                <li><Link to="/consultation">Kontak</Link></li>
               </ul>
             </div>
 
-            <div className="footer-col">
-              <h4>Kontak</h4>
-              <ul className="contact-list">
+            <div className="footer-column">
+              <h4>Hubungi Kami</h4>
+              <ul>
+                <li><a href="tel:+6285852345718">+62 858-5234-5718</a></li>
                 <li><a href="mailto:cdiyunoru@gmail.com">cdiyunoru@gmail.com</a></li>
-                <li><a href="tel:+6285852345718">+6285852345718</a></li>
-                <li>Tangerang Banten, Indonesia</li>
+                <li><a href="https://wa.me/6285852345718" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
               </ul>
-            </div>
-
-            <div className="footer-col">
-              <h4>Berlangganan</h4>
-              <form className="newsletter" onSubmit={(e) => e.preventDefault()} aria-label="Form Newsletter">
-                <input type="email" placeholder="Email Anda" aria-label="Email" required />
-                <button type="submit" className="newsletter-btn">Kirim</button>
-              </form>
-              <div className="socials" aria-label="Sosial Media">
-                <button type="button" className="whatsapp" aria-label="WhatsApp" onClick={(e) => { window.__setAppTheme && window.__setAppTheme('whatsapp'); const parent = e.currentTarget.closest('.socials'); parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active')); e.currentTarget.classList.add('is-active'); }}>🟢</button>
-                <button type="button" className="instagram" aria-label="Instagram" onClick={(e) => { window.__setAppTheme && window.__setAppTheme('instagram'); const parent = e.currentTarget.closest('.socials'); parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active')); e.currentTarget.classList.add('is-active'); }}>🟣</button>
-                <button type="button" className="linkedin" aria-label="LinkedIn" onClick={(e) => { window.__setAppTheme && window.__setAppTheme('linkedin'); const parent = e.currentTarget.closest('.socials'); parent && parent.querySelectorAll('a,button').forEach(el => el.classList.remove('is-active')); e.currentTarget.classList.add('is-active'); }}>🔵</button>
-              </div>
             </div>
           </div>
         </div>
@@ -486,8 +412,7 @@ function Portfolio() {
         </div>
       </footer>
     </div>
-    </>
   );
-};
+}
 
 export default Portfolio;
