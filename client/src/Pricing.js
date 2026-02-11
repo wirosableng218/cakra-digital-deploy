@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SEOHead from './components/SEOHead';
 import './App.css';
 import './Pricing.css';
 
@@ -241,7 +242,14 @@ function Pricing() {
   const currentPackages = activeTab === 'website' ? websitePackages : activeTab === 'software' ? softwarePackages : seoPackages;
 
   return (
-    <div className="App">
+    <>
+      <SEOHead 
+        title="Paket Harga Website & SEO - Cakra Digital Innovation"
+        description="Lihat paket harga jasa pembuatan website, SEO bergaransi, pembuatan aplikasi, dan instalasi software. Solusi digital terintegrasi dengan harga terjangkau untuk bisnis Anda."
+        keywords="paket harga website, SEO bergaransi, jasa pembuatan website, pembuatan aplikasi, instalasi software, harga web development, Tangerang, Jakarta, Indonesia"
+        canonicalUrl="/pricing"
+      />
+      <div className="App">
           <header className="header">
             <div className="logo" aria-label="Cakra Digital Innovation">
               <Link to="/" className="site-logo" aria-label="Beranda">
@@ -551,6 +559,7 @@ function Pricing() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 

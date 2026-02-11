@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from './components/SEOHead';
+import CTASection from './components/CTASection';
 import './App.css';
 import './Portfolio.css';
+import './components/CTASection.css';
 
 function Portfolio() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -168,7 +171,15 @@ function Portfolio() {
   };
 
   return (
-    <div className="App portfolio-page">
+    <>
+      <SEOHead 
+        title="Portfolio - Karya Digital Terbaik | Cakra Digital Innovation"
+        description="Lihat portfolio proyek digital terbaik kami: website, aplikasi, dan solusi digital untuk bisnis modern. Karya inovatif dengan teknologi terkini."
+        keywords="portfolio digital, karya website, proyek aplikasi, solusi digital, web development, aplikasi mobile, Tangerang, Jakarta, Indonesia"
+        canonicalUrl="/portfolio"
+        ogImage="/images/portfolio/ecommerce-fashion.jpg"
+      />
+      <div className="App portfolio-page">
       <header className="header">
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
@@ -405,22 +416,13 @@ function Portfolio() {
           </div>
         </section>
 
-        <section className="portfolio-cta">
-          <div className="portfolio-cta__inner">
-            <h2 className="cta-title">Siap Mewujudkan Proyek Impian Anda?</h2>
-            <p className="cta-subtitle">Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda.</p>
-            <div className="cta-actions">
-              <Link to="/consultation" className="cta-btn cta-btn--primary">
-                <span className="cta-btn-icon">💬</span>
-                <span>Konsultasi Gratis</span>
-              </Link>
-              <Link to="/pricing?tab=website" className="cta-btn cta-btn--secondary">
-                <span className="cta-btn-icon">📋</span>
-                <span>Lihat Paket Kami</span>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <CTASection 
+          title="Siap Mewujudkan Proyek Impian Anda?"
+          subtitle="Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda."
+          primaryText="Konsultasi Gratis"
+          secondaryText="Lihat Paket Kami"
+        />
+
       </main>
 
       <footer className="footer" aria-label="Situs Footer">

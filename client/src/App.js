@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
 import { Link } from 'react-router-dom';
+import SEOHead from './components/SEOHead';
+import CTASection from './components/CTASection';
+import './App.css';
+import './components/CTASection.css';
 import FeedbackForm from './FeedbackForm'; // Komponen form feedback
 
 function App() {
@@ -136,7 +139,14 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <>
+      <SEOHead 
+        title="Jasa Pembuatan Website & SEO Bergaransi - Cakra Digital Innovation"
+        description="Cakra Digital Innovation menyediakan jasa pembuatan website profesional, SEO bergaransi, pembuatan aplikasi, dan instalasi software untuk bisnis modern di Indonesia. Solusi digital terintegrasi dengan harga terjangkau."
+        keywords="jasa pembuatan website, SEO bergaransi, pembuatan aplikasi, instalasi software, website development, digital marketing, web design, aplikasi mobile, software development, Tangerang, Jakarta, Indonesia"
+        canonicalUrl="/"
+      />
+      <div className="App">
       <header className="header">
         <div className="logo" aria-label="Cakra Digital Innovation">
           <Link to="/" className="site-logo" aria-label="Beranda">
@@ -353,6 +363,14 @@ function App() {
           <p>Email: cdiyunoru@gmail.com | Telepon: +6285852345718</p>
           <FeedbackForm />
         </section>
+
+        <CTASection 
+          title="Siap Membangun Kehadiran Digital Anda?"
+          subtitle="Mari diskusikan kebutuhan digital Anda dan wujudkan solusi yang tepat untuk bisnis Anda."
+          primaryText="Konsultasi Gratis"
+          secondaryText="Lihat Paket Kami"
+        />
+
       </main>
 
       <footer className="footer" aria-label="Situs Footer">
@@ -450,7 +468,7 @@ function App() {
       </footer>
 
     </div>
-  );
-}
+    );
+};
 
 export default App;
