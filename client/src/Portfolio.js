@@ -21,7 +21,7 @@ function Portfolio() {
       category: 'website',
       client: 'Fashion Store Indonesia',
       description: 'Platform e-commerce modern dengan fitur lengkap untuk fashion retail online.',
-      image: '/images/portfolio/ecommerce-fashion.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
       features: [
         'Shopping cart & checkout',
@@ -39,7 +39,7 @@ function Portfolio() {
       category: 'website',
       client: 'Klinik Sehat Sejahtera',
       description: 'Website profil klinik dengan sistem appointment booking dan manajemen pasien.',
-      image: '/images/portfolio/klinik-kesehatan.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['React', 'Firebase', 'Tailwind CSS', 'Google Calendar'],
       features: [
         'Online appointment booking',
@@ -57,7 +57,7 @@ function Portfolio() {
       category: 'application',
       client: 'Logistik Cepat Indonesia',
       description: 'Aplikasi tracking armada real-time dengan dashboard analytics dan otomatisasi laporan.',
-      image: '/images/portfolio/logistik-app.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['React Native', 'Node.js', 'PostgreSQL', 'Google Maps'],
       features: [
         'Real-time GPS tracking',
@@ -75,7 +75,7 @@ function Portfolio() {
       category: 'website',
       client: 'EduTech Indonesia',
       description: 'Platform LMS (Learning Management System) dengan integrasi pembayaran dan video conference.',
-      image: '/images/portfolio/kursus-online.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'WebRTC'],
       features: [
         'Video conference integration',
@@ -93,7 +93,7 @@ function Portfolio() {
       category: 'application',
       client: 'PT. Manufaktur Maju',
       description: 'Sistem ERP terintegrasi untuk manajemen produksi, inventory, dan distribusi.',
-      image: '/images/portfolio/manufacturing-erp.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['Vue.js', 'Python', 'Django', 'PostgreSQL'],
       features: [
         'Production planning',
@@ -111,7 +111,7 @@ function Portfolio() {
       category: 'website',
       client: 'Warung Nusantara',
       description: 'Website restoran dengan sistem pemesanan online, manajemen menu, dan tracking delivery.',
-      image: '/images/portfolio/restaurant-management.jpg',
+      image: '/images/portfolio/ampul_Cakra_Digital_Innovation.png',
       tags: ['React', 'Node.js', 'MongoDB', 'Google Maps API'],
       features: [
         'Online ordering system',
