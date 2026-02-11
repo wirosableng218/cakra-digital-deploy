@@ -486,8 +486,7 @@ function Portfolio() {
         </div>
       </footer>
     </div>
-    </>
   );
-}
+};
 
 export default Portfolio;
